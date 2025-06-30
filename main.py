@@ -1,13 +1,20 @@
 from stats import get_num_words, count_each_char
+import sys
 
-imported_book = "books/frankenstein.txt"
+
+
+if len(sys.argv) != 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+
+book_path = sys.argv[1]
 
 def main():
     print("============ BOOKBOT ============")
-    print(f"Analyizing book found at {imported_book}")
+    print(f"Analyizing book found at {book_path}")
     print("------------ Word Count ------------")
-    get_num_words("books/frankenstein.txt")
+    get_num_words(book_path)
     print("------------ Character Count ------------")
-    count_each_char("books/frankenstein.txt")
+    count_each_char(book_path)
     print("============ END ============")
 main()
