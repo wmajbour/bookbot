@@ -1,33 +1,26 @@
-import sys
-
-def get_book_name(book):
-    return book
-
-def get_book_text(path_to_file):
-
-    with open(path_to_file) as f:
-        return f.read()
+def get_num_words(text):
+    words = text.split()
+    return len(words)
 
 
-def get_num_words(book):
-    parsed = get_book_text(book)
-    num_words = parsed.split()
-    print(f"Found {len(num_words)} total words")
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
+        else:
+            chars[lowered] = 1
+    return chars
 
-def count_each_char(book):
-    characters = get_book_text(book).lower()
-    char_dict = {}
-    for i in characters:
-        if i.isalpha():
-            if i in char_dict:
-                char_dict[i] += 1
-            else:
-                char_dict[i] = 1
-    char_items = list(char_dict.items())
-    char_items.sort(reverse=True, key=sort_dict)
-    
-    for char, count in char_items:
-        print(f"{char}: {count}")
 
-def sort_dict(items):
-    return items[1]
+def sort_on(d):
+    return d["num"]
+
+
+def chars_dict_to_sorted_list(num_chars_dict):
+    sorted_list = []
+    for ch in num_chars_dict:
+        sorted_list.append({"char": ch, "num": num_chars_dict[ch]})
+    sorted_list.sort(reverse=True, key=sort_on)
+    return sorted_list
